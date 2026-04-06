@@ -4,7 +4,6 @@ import Footer from "./component/footer/Footer";
 import Employees from "./component/employees/Employees";
 import EmployeePopup from "./component/employeePopup/employeePopup";
 import DeletePopup from "./component/deletePopup/DeletePopup";
-import EditEmployeePopup from "./component/editEmployeePopup/EditEmployeePopup";
 import { useDispatch } from "react-redux";
 import { getEmployees } from "./store/feature/employee/employee.thunk";
 
@@ -20,7 +19,6 @@ const App = () => {
     <div className="w-full min-h-screen flex flex-col">
       <EmployeePopup />
       <DeletePopup />
-      <EditEmployeePopup />
       <Navbar />
 
       <div className="flex-1 py-10">

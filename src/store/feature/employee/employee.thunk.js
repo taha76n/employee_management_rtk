@@ -6,8 +6,9 @@ export const getEmployees = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get("employee");
-      console.log(response.data);
+      // console.log(response.data);
       return response.data;
+    // eslint-disable-next-line no-unused-vars
     } catch (error) {
       return rejectWithValue("Something Went Wrong");
     }

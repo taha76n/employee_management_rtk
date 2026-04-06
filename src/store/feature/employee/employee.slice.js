@@ -32,6 +32,6 @@ const employeeSlice = createSlice({
   }
 })
 
-const {} = employeeSlice.actions
+// const {} = employeeSlice.actions
 
 export default employeeSlice.reducer;

@@ -26,7 +26,6 @@ const Employees = () => {
 };
 
 const EmployeeCard = ({details}) => {
-  console.log(details);
   
   const dispatch = useDispatch();
 
