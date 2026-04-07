@@ -13,13 +13,13 @@ const popupSlice = createSlice({
       state.employeePopup = action.payload ?? true;
     },
 
-    closeEmployeePopup: (state, action) => {
+    closeEmployeePopup: (state) => {
       state.employeePopup = false;
     },
     openDeletePopup: (state, action) => {
       state.deletePopup = action.payload ?? true;
     },
-    closeDeletePopup: (state, action) => {
+    closeDeletePopup: (state) => {
       state.deletePopup = false;
     },
   },

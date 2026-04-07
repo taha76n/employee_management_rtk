@@ -9,33 +9,26 @@ import {
 } from "../../store/feature/popup/popup.slice";
 
 const Employees = () => {
-  const employees = useSelector((state) => state.employee.employee)
-  
+  const employees = useSelector((state) => state.employee.employee);
+
   return (
     <Layout>
       <ul className="list bg-base-100 rounded-box shadow-md">
-        
         {employees.map((details) => (
-            <EmployeeCard details={details} key={details.id}/>
+          <EmployeeCard details={details} key={details.id} />
         ))}
-        
-        
       </ul>
     </Layout>
   );
 };
 
-const EmployeeCard = ({details}) => {
-  
+const EmployeeCard = ({ details }) => {
   const dispatch = useDispatch();
 
   return (
     <li className="list-row">
       <div>
-        <img
-          className="size-10 rounded-box"
-          src={details.profileUrl}
-        />
+        <img className="size-10 rounded-box" src={details.profileUrl} />
       </div>
       <div>
         <div>{details.name}</div>
@@ -43,17 +36,15 @@ const EmployeeCard = ({details}) => {
           {details.email}
         </div>
       </div>
-      <p className="list-col-wrap text-xs">
-        {details.bio}
-      </p>
+      <p className="list-col-wrap text-xs">{details.bio}</p>
       <button
-        onClick={() => dispatch(openEmployeePopup())}
+        onClick={() => dispatch(openEmployeePopup(details))}
         className="btn btn-square btn-ghost text-xl"
       >
         <CiEdit />
       </button>
       <button
-        onClick={() => dispatch(openDeletePopup())}
+        onClick={() => dispatch(openDeletePopup(details.id))}
         className="btn btn-square btn-ghost text-xl"
       >
         <MdDeleteOutline />

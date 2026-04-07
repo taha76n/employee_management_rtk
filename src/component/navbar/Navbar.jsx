@@ -5,9 +5,7 @@ import { useDispatch } from "react-redux";
 import { openEmployeePopup } from "../../store/feature/popup/popup.slice";
 
 const Navbar = () => {
-
   const dispatch = useDispatch();
-  
 
   return (
     <div className="bg-base-100 sticky top-0 z-10">
@@ -17,9 +15,10 @@ const Navbar = () => {
             <a className="btn btn-ghost text-xl">daisyUI</a>
           </div>
           <div className="navbar-end">
-            <button 
-            onClick={() => dispatch(openEmployeePopup())}
-            className="btn btn-ghost btn-circle">
+            <button
+              onClick={() => dispatch(openEmployeePopup())}
+              className="btn btn-ghost btn-circle"
+            >
               <FaPlus />
             </button>
             <button className="btn btn-ghost btn-circle">

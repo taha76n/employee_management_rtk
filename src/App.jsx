@@ -8,13 +8,12 @@ import { useDispatch } from "react-redux";
 import { getEmployees } from "./store/feature/employee/employee.thunk";
 
 const App = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getEmployees());
-  }, [])
-  
+  }, []);
+
   return (
     <div className="w-full min-h-screen flex flex-col">
       <EmployeePopup />

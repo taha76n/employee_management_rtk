@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeEmployeePopup } from "../../store/feature/popup/popup.slice";
+import {
+  postEmployees,
+  updateEmployees,
+} from "../../store/feature/employee/employee.thunk";
 
 const EmployeePopup = () => {
-  console.log("Component rendered");
   const [formDetails, setFormDetails] = useState({
     profileUrl: "",
     name: "",
@@ -24,8 +27,39 @@ const EmployeePopup = () => {
     });
   };
 
-  console.log(formDetails);
-  console.log("popup state:", popup);
+  const submitHandler = async () => {
+    if (popup.id) {
+      await dispatch(
+        updateEmployees({
+          id: popup.id,
+          details: formDetails,
+        })
+      );
+    } else {
+      await dispatch(postEmployees(formDetails));
+    }
+    dispatch(closeEmployeePopup());
+  };
+
+  useEffect(() => {
+    if (!popup) {
+      setFormDetails({
+        profileUrl: "",
+        name: "",
+        email: "",
+        bio: "",
+        highlight: false,
+      });
+    } else if (popup.id) {
+      setFormDetails({
+        profileUrl: popup.profileUrl,
+        name: popup.name,
+        email: popup.email,
+        bio: popup.bio,
+        highlight: false,
+      });
+    }
+  }, [popup]);
 
   if (!popup) {
     return null;
@@ -82,7 +116,9 @@ const EmployeePopup = () => {
           placeholder="Bio"
         ></textarea>
 
-        <button className="btn btn-neutral mt-4">Submit</button>
+        <button onClick={submitHandler} className="btn btn-neutral mt-4">
+          Submit
+        </button>
       </fieldset>
     </div>
   );
