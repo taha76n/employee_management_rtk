@@ -3,8 +3,11 @@ import Layout from "../../layout/Layout";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { openEmployeePopup } from "../../store/feature/popup/popup.slice";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   return (
@@ -12,7 +15,7 @@ const Navbar = () => {
       <Layout>
         <div className="navbar bg-base-100 shadow-sm">
           <div className="navbar-start">
-            <a className="btn btn-ghost text-xl">daisyUI</a>
+            <a onClick={()=>navigate("/")} className="btn btn-ghost text-xl">Employee Management System</a>
           </div>
           <div className="navbar-end">
             <button
@@ -21,7 +24,12 @@ const Navbar = () => {
             >
               <FaPlus />
             </button>
-            <button className="btn btn-ghost btn-circle">
+            <button
+              onClick={() => {
+                navigate("/favourites");
+              }}
+              className="btn btn-ghost btn-circle"
+            >
               <div className="indicator">
                 <svg
                   className="size-[1.2em]"

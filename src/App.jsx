@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import Navbar from "./component/navbar/Navbar";
 import Footer from "./component/footer/Footer";
 import Employees from "./component/employees/Employees";
-import EmployeePopup from "./component/employeePopup/employeePopup";
+import EmployeePopup from "./component/employeePopup/EmployeePopup";
 import DeletePopup from "./component/deletePopup/DeletePopup";
 import { useDispatch } from "react-redux";
 import { getEmployees } from "./store/feature/employee/employee.thunk";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import FaveouritesPage from "./component/faveouritesPage/FaveouritesPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -16,15 +18,21 @@ const App = () => {
 
   return (
     <div className="w-full min-h-screen flex flex-col">
-      <EmployeePopup />
-      <DeletePopup />
-      <Navbar />
+      <BrowserRouter>
+        <EmployeePopup />
+        <DeletePopup />
 
-      <div className="flex-1 py-10">
-        <Employees />
-      </div>
+        <Navbar />
 
-      <Footer />
+        <div className="flex-1 py-10">
+          <Routes>
+            <Route element={<FaveouritesPage />} path="/favourites"></Route>
+            <Route element={<Employees />} path="/"></Route>
+          </Routes>
+        </div>
+
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 };

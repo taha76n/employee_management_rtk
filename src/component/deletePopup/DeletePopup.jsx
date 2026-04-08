@@ -7,7 +7,6 @@ const DeletePopup = () => {
   const dispatch = useDispatch();
 
   const deletePopup = useSelector((state) => state.popup.deletePopup);
-  console.log(deletePopup);
 
   if (!deletePopup) {
     return null;

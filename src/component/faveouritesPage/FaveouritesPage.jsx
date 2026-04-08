@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Layout from "../../layout/Layout";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  openDeletePopup,
-  openEmployeePopup,
-} from "../../store/feature/popup/popup.slice";
-import { updateEmployees } from "../../store/feature/employee/employee.thunk";
+import { getAllFavourites } from "../../store/feature/favourites/favourites.thunk";
 
-const Employees = () => {
-  const employees = useSelector((state) => state.employee.employee);
+const FaveouritesPage = () => {
+  const favourites = useSelector((state) => state.favourites.favourites);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getAllFavourites());
+  }, [dispatch]);
 
   return (
     <Layout>
       <ul className="list bg-base-100 rounded-box shadow-md">
-        {employees.map((details) => (
+        {favourites.map((details) => (
           <EmployeeCard details={details} key={details.id} />
         ))}
       </ul>
@@ -24,18 +26,6 @@ const Employees = () => {
 };
 
 const EmployeeCard = ({ details }) => {
-
-  const d = {
-    ...details,
-    highlight: !details.highlight
-  }
-  
-
-  const handleHighlight = async() => {
-    await dispatch(updateEmployees({id:details.id,details: d}));
-  }
-  
-  const dispatch = useDispatch();
 
   return (
     <li className="list-row">
@@ -49,21 +39,13 @@ const EmployeeCard = ({ details }) => {
         </div>
       </div>
       <p className="list-col-wrap text-xs">{details.bio}</p>
-      <button
-        onClick={() => dispatch(openEmployeePopup(details))}
-        className="btn btn-square btn-ghost text-xl"
-      >
+      <button className="btn btn-square btn-ghost text-xl">
         <CiEdit />
       </button>
-      <button
-        onClick={() => dispatch(openDeletePopup(details.id))}
-        className="btn btn-square btn-ghost text-xl"
-      >
+      <button className="btn btn-square btn-ghost text-xl">
         <MdDeleteOutline />
       </button>
-      <button 
-      onClick={handleHighlight}
-      className="btn btn-square btn-ghost">
+      <button className="btn btn-square btn-ghost">
         <svg
           className="size-[1.2em]"
           xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +55,7 @@ const EmployeeCard = ({ details }) => {
             strokeLinejoin="round"
             strokeLinecap="round"
             strokeWidth="2"
-            fill={details.highlight ? "currentColor" : "none"}
+            fill="currentColor"
             stroke="currentColor"
           >
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"></path>
@@ -84,4 +66,4 @@ const EmployeeCard = ({ details }) => {
   );
 };
 
-export default Employees;
+export default FaveouritesPage;
